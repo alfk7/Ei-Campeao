@@ -1,3 +1,4 @@
+const cardapioController = require("../controller/cardapioController")
 var express = require('express');
 var router = express.Router();
 
@@ -5,5 +6,6 @@ var router = express.Router();
 router.get('/', function(req, res, next) {
   res.render('index', { title: 'Express' });
 });
+router.get('/',)
 
 module.exports = router;
