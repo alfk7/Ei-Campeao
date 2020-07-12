@@ -14,7 +14,12 @@ const app = express();
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
-mongoose.connect("mongodb://localhost/Ei_Campeao")
+mongoose.Promise = global.Promise;
+mongoose.connect("mongodb://localhost/Ei_Campeao",{useMongoClient:true}).then(()=>{
+  console.log("mongodb conectado!!")
+}).catch((err)=>{
+  console.log("houve um erro ao se conectar ao mongodb:" + err)
+})
 
 app.use(logger('dev'));
 app.use(express.json());
