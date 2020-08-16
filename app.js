@@ -5,7 +5,7 @@ const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const mongoose = require("mongoose")
 const session = require('express-session');
-
+const db = require("./config/database")
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
 
@@ -16,7 +16,7 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
 mongoose.Promise = global.Promise;
-mongoose.connect("mongodb://localhost/Ei_Campeao",{useMongoClient:true}).then(()=>{
+mongoose.connect(db.mongouri,{useUnifiedTopology:true, useNewUrlParser:true}).then(()=>{
   console.log("mongodb conectado!!")
 }).catch((err)=>{
   console.log("houve um erro ao se conectar ao mongodb:" + err)
