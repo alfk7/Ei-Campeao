@@ -1,6 +1,6 @@
 const VerificaUsuarioLogado = (req, res, next) => {
 
-    if(!req.session.usuario){
+    if(!req.session.restaurante){
         res.redirect('/login');
     }
 

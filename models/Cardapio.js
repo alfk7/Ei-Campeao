@@ -19,7 +19,7 @@ const CardapioSchema = new Schema({
     },
     restaurante:{
         type: Schema.Types.ObjectId,
-        ref: restaurantes,
+        ref: "restaurantes",
         required:true
     }
 })

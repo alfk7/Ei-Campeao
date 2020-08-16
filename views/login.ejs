@@ -1,0 +1,50 @@
+<%-include("./partials/header",{active:title})%>
+  <div >
+  <section class="container first">
+    <form action="/login" method="POST">
+        <div class="row form-group">
+            <div class="col-md-12">
+                <div class="d-flex justify-content-center">
+                    <span class="h3 mb-5 text-blue">Login</span>
+                </div>
+                <div class="form-group mb-4 d-flex justify-content-center">
+                    <input id="cnpjcpf" class="form-control input-decoration col-md-8" type="text" required="required" data-mask="000.000.000-00" name="cpf_cnpj"
+                        placeholder="CPF/CNPJ">
+                </div>
+                <div class="form-group mb-4 d-flex justify-content-center">
+                    <input id="senha" class="form-control input-decoration col-md-8" type="password" required="required" name="senha"
+                        placeholder="Senha">
+                </div>
+                <div class="d-flex justify-content-end col-md-8">
+                    <button for="submit">Logar</button>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="modal fade" id="image-cropper" data-backdrop="static" tabindex="-1" role="dialog"
+            aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title text-blue" id="staticBackdropLabel">Ajuste da Imagem</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div id="canvas">
+                            
+                        </div>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button id="pronto" type="button" class="btn btn-site" data-dismiss="modal">Pronto</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</section>
+</div>
+<%- include('./partials/footer') %>

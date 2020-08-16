@@ -1,37 +1,46 @@
 <%-include("./partials/header",{active:title})%>
-<div class="d-flex">
-<div class="card" style="width: 16rem">
+<div class="d-flex justify-content-center">
+  <h1>Nome do bar</h1>
+</div>
+<div class=" d-flex justify-content-center centro row align-items-center">
+  <img src="/images/default.png" height="70" width="70" alt="Foto do Perfil" class="profile-picture perfilmargem">
+  <ul class="nav nav-pills">
+    <li class="nav-item">
+      <a class="nav-link active" href="#">Cardapio</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="#">Mesas</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="#">Vendas</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="#">Editar perfil</a>
+    </li>
+  </ul>
+</div>
+<div class="d-flex justify-content-center teste col-8 centro caixa zero">
+  <div class="d-flex justify-content-between align-items-center col-12 amarelo">
+    <h3>Cardapio</h3>
+    <a href="#">categoria</a>
+    <a href="#">promoção</a>
+    <a href="./cadastroProduto"><img class="arredondar" src="/images/adcionar.png" alt="adcione um produto" width="35"
+        height="35"></a>
+
+  </div>
+  <% if(cardapio.lengh ==0){%>
+  <h2>Sem produto cadastrado</h2>
+  <%} else{ %>
+  <% for(produto of cardapio) { %>
+  <div class="card " style="width: 14rem">
     <img src="./images/default.png" class="card-img-top w-100" alt="teste">
     <div class="card-body">
-      <h5 class="card-title">Card title</h5>
-      <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-      <a href="#" class="btn btn-primary">Go somewhere</a>
+      <h3 class="card-title"><%= produto.nome%></h3>
+      <h5 class="card-text"><%=produto.preco.toLocaleString('pt-BR',{style: 'currency', currency: 'BRL'})%></h5>
+      <p class="card-text"><%= produto.descricao%></p>
     </div>
   </div>
-  <div class="card" style="width: 16rem">
-    <img src="./images/default.png" class="card-img-top w-100" alt="teste">
-    <div class="card-body">
-      <h5 class="card-title">Card title</h5>
-      <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-      <a href="#" class="btn btn-primary">Go somewhere</a>
-    </div>
-  </div>
-  <div class="card" style="width: 16rem">
-    <img src="./images/default.png" class="card-img-top w-100" alt="teste">
-    <div class="card-body">
-      <h5 class="card-title">Card title</h5>
-      <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-      <a href="#" class="btn btn-primary">Go somewhere</a>
-    </div>
-  </div>
-  <div class="card" style="width: 16rem">
-    <img src="./images/default.png" class="card-img-top w-100" alt="teste">
-    <div class="card-body">
-      <h5 class="card-title">Card title</h5>
-      <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-      <a href="#" class="btn btn-primary">Go somewhere</a>
-    </div>
-  </div>
+  <% }} %>
 
 </div>
 <%- include('./partials/footer') %>
