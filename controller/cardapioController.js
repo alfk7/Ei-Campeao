@@ -14,14 +14,14 @@ const cardapioController = {
         const hash = bcrypt.hashSync(senha,10)
         const novoRestaurante = {nome,cpf_cnpj,senha:hash};
         new Restaurante(novoRestaurante).save().then(()=>{
-            res.send("restaurante cadastrado com sucesso!!")
+            res.render("login",{title:'login',texto:"cadastro efetuado com sucesso!!"})
         }).catch((err)=>{
-            res.redirect('/cadastro?error=1')
+            res.redirect('/?error=1');
         })
 
     },
     showLogin:(req,res)=>{
-        res.render('login',{title:'login'})
+        res.render('login',{title:'login', texto:0})
     },
     login: async (req,res)=>{
         const {cpf_cnpj,senha}=req.body;
@@ -40,14 +40,12 @@ const cardapioController = {
     restaurante: async(req,res)=>{
         let restaurante =  req.session.restaurante._id;
         let cardapio = await Cardapio.find({restaurante})
-        console.log(cardapio)
+        console.log(cardapio.length)
         res.render("restaurante",{title:'meu restaurante',cardapio})
     },
     cadastroProduto:(req,res)=>{
         let cardapio = req.session.cardapio
         let restaurante = req.session.restaurante
-        console.log(restaurante._id)
-        console.log(cardapio)
         res.render("cadastroProduto",{title:'cadastrar produto'})
         
     },
@@ -69,7 +67,7 @@ const cardapioController = {
         let novoProduto = {nome,descricao,preco,restaurante}
         new Cardapio(novoProduto).save().then(()=>{
             req.session.cardapio = novoProduto
-            res.send("produto cadastrado com sucesso!!")
+            res.redirect("/restaurante")
         }).catch((err)=>{
                 res.send('erro: '+err)
             })

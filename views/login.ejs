@@ -7,6 +7,11 @@
                 <div class="d-flex justify-content-center">
                     <span class="h3 mb-5 text-blue">Login</span>
                 </div>
+                <% if(texto != 0){%>
+                    <div class="d-flex justify-content-center">
+                        <span class="h3 mb-5 text-blue"><%=texto%></span>
+                    </div>
+                    <% } %>
                 <div class="form-group mb-4 d-flex justify-content-center">
                     <input id="cnpjcpf" class="form-control input-decoration col-md-8" type="text" required="required" data-mask="000.000.000-00" name="cpf_cnpj"
                         placeholder="CPF/CNPJ">
