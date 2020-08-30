@@ -1,31 +1,12 @@
 <%-include("./partials/header",{active:title})%>
-<div class="d-flex justify-content-center">
-  <h1>Nome do bar</h1>
-</div>
-<div class=" d-flex justify-content-center centro row align-items-center">
-  <img src="/images/default.png" height="70" width="70" alt="Foto do Perfil" class="profile-picture perfilmargem">
-  <ul class="nav nav-pills">
-    <li class="nav-item">
-      <a class="nav-link active" href="#">Cardapio</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" href="#">Mesas</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" href="#">Vendas</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" href="#">Editar perfil</a>
-    </li>
-  </ul>
-</div>
+
 <div class="d-flex justify-content-center teste col-8 centro caixa zero">
   <div class="d-flex justify-content-between align-items-center col-12 amarelo">
     <h3>Cardapio</h3>
     <a href="#">categoria</a>
     <a href="#">promoção</a>
-    <a href="./cadastroProduto"><img class="arredondar" src="/images/adcionar.png" alt="adcione um produto" width="35"
-        height="35"></a>
+    <a href="#" class="card-link" data-toggle="modal" data-target="#produtosModal"><img class="arredondar"
+        src="/images/adcionar.png" alt="adcione um produto" width="35" height="35"></a>
 
   </div>
   <% if(cardapio.length ==0){%>
@@ -42,5 +23,75 @@
   </div>
   <% }} %>
 
+</div>
+<div class="modal fade" id="produtosModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog modal-xl" role="document">
+    <div class="modal-content zero">
+      <div class="modal-header amarelo">
+        <h5 class="modal-title">Adicionar produto</h5>
+        <button class="close" type="button" data-dismiss="modal">
+          <span>x</span>
+        </button>
+      </div>
+      <div class="modal-body verde">
+        <section class="first">
+          <div class="container divInfo">
+
+
+            <div class="row container">
+
+              <div class="col-md-12">
+                <div class="row">
+                  <div class="col border-right">
+                    <div class="d-flex justify-content-center">
+                      <span class="h3 mb-5 text-blue">Foto</span>
+                    </div>
+                    <div class="d-flex justify-content-center">
+                      <img src="/images/default.png" alt="Foto/Logo" width="200px" height="200px"
+                        class="image-preview mb-5" id="image-preview">
+                    </div>
+                    <div class="d-flex justify-content-center">
+                      <label for="image-selector" class="btn btn-site">
+                        Selecione Imagem
+                        <input class="form-control d-none" type="file" id="image-selector" name="imagem">
+                      </label>
+                    </div>
+                  </div>
+                  <div class="col">
+                    <form action="/cadastroProduto" method="POST" name="formProduto" id="formProduto">
+                      <div id="cadastro-dados">
+                        <div class="form-group mb-2">
+                          <input id="nome" class="form-control input-decoration" type="text" name="nome"
+                            placeholder="Nome do Produto" maxlength="100" required>
+                        </div>
+                        <div class="form-group mb-2">
+                          <input id="marca" class="form-control input-decoration" type="text" name="marca"
+                            placeholder="Marca do Produto" maxlength="100" required>
+                        </div>
+                        <div class="form-group mb-2">
+                          <textarea name="descricao" id="descricao" class="form-control input-decoration" rows="5"
+                            placeholder="Descrição" type="text" maxlength="200" required></textarea>
+                        </div>
+                        <div class="d-flex">
+                          <div class="form-group mb-2 mw-75 mr-1">
+                            <input id="estoque" class="form-control input-decoration" type="number" min="0"
+                              name="estoque" placeholder="Quantidade" required>
+                          </div>
+                          <div class="form-group mb-2 mw-75 ml-1">
+                            <input id="preco" class="form-control input-decoration" type="number" step=0.01 min="0"
+                              name="preco" placeholder="Preço" required>
+                          </div>
+                        </div>
+
+
+                        <input class="form-control d-none" type="hidden" name="imagemb64" id="imagemb64" value="">
+                        <div class="botoes" id="botaocadastro">
+                          <button type="submit" id="adicionarProduto" class="btn btn-site mr-5 mb-4 mt-3">Adicionar
+                            produto</button>
+                        </div>
+                      </div>
+                    </form>
+</div>
+</div>
 </div>
 <%- include('./partials/footer') %>

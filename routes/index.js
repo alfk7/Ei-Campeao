@@ -9,8 +9,12 @@ router.post("/cadastro", cardapioController.cadastro)
 router.get('/restaurante',verificarRestauranteLogado ,cardapioController.restaurante)
 router.get('/login',cardapioController.showLogin)
 router.post('/login',cardapioController.login)
-router.get('/cadastroProduto',verificarRestauranteLogado,cardapioController.cadastroProduto)
 router.post('/cadastroProduto',cardapioController.novoProduto)
+router.get('/mesas',verificarRestauranteLogado,cardapioController.showMesas)
+router.post('/cadastroMesas',cardapioController.adicionarMesa)
+
+// visão do cliente
+router.get('/homeMesa',cardapioController.showHomeMesa)
 
 
 module.exports = router;

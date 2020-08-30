@@ -2,6 +2,9 @@ body {
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
   background-color: #02c8a7ff
 }
+header{
+  width: auto
+}
 div {
   padding-left: 15px;
   padding-right: 15px;
@@ -45,6 +48,9 @@ a {
 }
 .amarelo{
   background-color: #f9be02ff;
+}
+.verde{
+  background-color: #02c8a7ff;
 }
   
 

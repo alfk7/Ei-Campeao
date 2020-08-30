@@ -1,0 +1,51 @@
+<%-include("./partials/header",{active:title})%>
+
+<div class="d-flex justify-content-center teste col-8 centro caixa zero">
+  <div class="d-flex justify-content-between align-items-center col-12 amarelo">
+    <h3>Mesas</h3>
+    <a href="#">Mesas</a>
+    <a href="#">Qr code</a>
+    <a href="#" class="card-link" data-toggle="modal" data-target="#produtosModal"><img class="arredondar"
+        src="/images/adcionar.png" alt="adcione um produto" width="35" height="35"></a>
+    <div class="modal fade" id="produtosModal" tabindex="-1" role="dialog">
+      <div class="modal-dialog modal-sm" role="document">
+        <div class="modal-content zero">
+          <div class="modal-header amarelo">
+            <h5 class="modal-title">Adicionar mesas</h5>
+            <button class="close" type="button" data-dismiss="modal">
+              <span>x</span>
+            </button>
+          </div>
+          <form action="/cadastroMesas" method="POST" name="formProduto" id="formProduto">
+            <div class="form-group mb-2">
+              <input id="numero" class="form-control input-decoration" type="number" name="numero"
+                placeholder="digite o numero de mesas" maxlength="100" required>
+            </div>
+            <div class="botoes" id="botaocadastro">
+              <button type="submit" id="adicionarMesa" class="btn btn-site mr-5 mb-4 mt-3">Adicionar
+                mesa</button>
+            </div>
+          </form>
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+  <% if(minhasMesas.length ==0){%>
+  <h2>Sem mesa cadastrada</h2>
+  <%} else{ %>
+  <% for(mesa of minhasMesas) { %>
+  <div class="card " style="width: 14rem">
+    <img src="./images/default.png" class="card-img-top w-100" alt="teste">
+    <div class="card-body">
+      <h3 class="card-title"> mesa <%=mesa.numero%></h3>
+    </div>
+  </div>
+  <% }} %>
+
+</div>
+
+
+<%- include('./partials/footer') %>
