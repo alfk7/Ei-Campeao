@@ -92,38 +92,39 @@ const cardapioController = {
         let usuario = req.session.restaurante._id;
         let {numero}= req.body;
         let nMesaAtt = 1
-        console.log(numero);
         const nMesas = await Mesa.find({restaurante:usuario});
-        console.log(nMesas.length)
         if(nMesas.length == 0){
             for (let i = nMesaAtt; i <= numero; i++) {
                 let qrCode = "provisório"
                 let novaMesa = {numero:i,qrCode,restaurante:usuario};
                 new Mesa(novaMesa).save().then(async()=>{
                     let att = await Mesa.findOne({numero:i});
-                    console.log(att);
                     await Mesa.updateOne({_id:att._id},{qrCode:`http://localhost:3000/homeMesas?id:${att._id}`})
-                    console.log(att.numero);
                 });
                 
             }
         } else{
             for (const mesa of nMesas) {
-                nMesaAtt++;    
+                nMesaAtt++; 
+                console.log(nMesaAtt)   
             }
-            numero = nMesaAtt+numero;
-            for (let i = nMesaAtt; i <= numero; i++) {
+            
+            numero = parseInt(nMesaAtt)+parseInt(numero);
+            for (let i = nMesaAtt; i < numero; i++) {
+                
                 let qrCode = "provisório"
                 let novaMesa = {numero:i,qrCode,restaurante:usuario};
-                new Mesa(novaMesa).save().then(()=>{});
-                let att = await Mesa.findOne({numero:i});
-                await Mesa.updateOne({_id:att._id},{qrCode:`http://localhost:3000/homeMesas?id:${att._id}`})
-                console.log(att.numero);
+                new Mesa(novaMesa).save().then(async()=>{
+                    let att = await Mesa.findOne({numero:i});
+                    await Mesa.updateOne({_id:att._id},{qrCode:`http://localhost:3000/homeMesas?id:${att._id}`})
+                    console.log(att.numero);
+                });
+                
             }
         }
-        let minhasMesas = await Mesa.find();
+        let minhasMesas = await Mesa.find({restaurante:usuario});
         req.session.mesa = minhasMesas
-        res.redirect("/mesas")
+        res.redirect('/mesas')
         
         
     },
