@@ -103,7 +103,7 @@ const cardapioController = {
                 let novaMesa = {numero:i,qrCode,restaurante:usuario};
                 new Mesa(novaMesa).save().then(async()=>{
                     let att = await Mesa.findOne({numero:i});
-                    await Mesa.updateOne({_id:att._id},{qrCode:`http://localhost:3000/homeMesa?id=${att._id}`})
+                    await Mesa.updateOne({_id:att._id},{qrCode:`https://radiant-coast-77254.herokuapp.com/homeMesa?id=${att._id}`})
                 });
                 
             }
@@ -118,7 +118,7 @@ const cardapioController = {
                 let novaMesa = {numero:i,qrCode,restaurante:usuario};
                 new Mesa(novaMesa).save().then(async()=>{
                     let att = await Mesa.findOne({numero:i});
-                    await Mesa.updateOne({_id:att._id},{qrCode:`http://localhost:3000/homeMesa?id=${att._id}`})
+                    await Mesa.updateOne({_id:att._id},{qrCode:`https://radiant-coast-77254.herokuapp.com/homeMesa?id=${att._id}`})
                 });
                 
             }
