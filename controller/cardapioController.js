@@ -108,7 +108,7 @@ const cardapioController = {
                 
             }
         } else{
-            for (const mesa of nMesas) {
+            for (const mesa of nMesas) { 
                 nMesaAtt++; 
                 console.log(nMesaAtt)   
             }
@@ -138,16 +138,15 @@ const cardapioController = {
             res.render("teste",{title:"teste",usuario,minhasMesas,data})
             
             
-        })
+        }) 
         
 
     },
     showHomeMesa: async(req,res)=>{
-        let usuario = req.session.restaurante._id;
         let {id} = req.query;
         console.log(id)
         let mesa = await Mesa.findOne({_id:id})
-        res.render('homeMesa',{title:"sua mesa",mesa,usuario})
+        res.render('homeMesa',{title:"sua mesa",mesa})
     }
 
 }
