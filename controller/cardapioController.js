@@ -98,7 +98,7 @@ const cardapioController = {
         let nMesaAtt = 1
         const nMesas = await Mesa.find({restaurante:usuario});
         if(nMesas.length == 0){
-            for (let i = nMesaAtt; i <= numero; i++) {
+            for (let i = nMesaAtt; i < numero; i++) {
                 let qrCode = "provisório"
                 let novaMesa = {numero:i,qrCode,restaurante:usuario};
                 new Mesa(novaMesa).save().then(async()=>{
