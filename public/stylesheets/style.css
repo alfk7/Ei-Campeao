@@ -46,11 +46,17 @@ a {
   height: 120px;
   
 }
+.card-title{
+  text-align: center;
+}
 .amarelo{
   background-color: #f9be02ff;
 }
 .verde{
   background-color: #02c8a7ff;
+}
+.disable{
+  display: none;
 }
   
 

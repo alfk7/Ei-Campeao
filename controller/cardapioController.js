@@ -1,4 +1,4 @@
-const qr= require("qr-image")
+const qr= require("qrcode")
 
 require("../models/Restaurante")
 require("../models/Cardapio")
@@ -85,14 +85,17 @@ const cardapioController = {
     showMesas: async (req,res)=>{
         let usuario =  req.session.restaurante._id;
         let minhasMesas = await Mesa.find({restaurante:usuario});
-        console.log(minhasMesas.length)
         res.render('mesas',{title:"Suas mesas", usuario, minhasMesas})
+    },
+    showQr: async(req,res)=>{
+        let usuario =  req.session.restaurante._id;
+        let minhasMesas = await Mesa.find({restaurante:usuario});
+        res.render('qrMesas',{title:"meus qrs",usuario,minhasMesas})
     },
     adicionarMesa: async (req,res)=>{
         let usuario = req.session.restaurante._id;
         let {numero}= req.body;
         let nMesaAtt = 1
-        console.log(numero);
         const nMesas = await Mesa.find({restaurante:usuario});
         console.log(nMesas.length)
         if(nMesas.length == 0){
@@ -101,9 +104,7 @@ const cardapioController = {
                 let novaMesa = {numero:i,qrCode,restaurante:usuario};
                 new Mesa(novaMesa).save().then(async()=>{
                     let att = await Mesa.findOne({numero:i});
-                    console.log(att);
-                    await Mesa.updateOne({_id:att._id},{qrCode:`http://localhost:3000/homeMesas?id:${att._id}`})
-                    console.log(att.numero);
+                    await Mesa.updateOne({_id:att._id},{qrCode:`http://localhost:3000/homeMesa?id=${att._id}`})
                 });
                 
             }
@@ -111,14 +112,15 @@ const cardapioController = {
             for (const mesa of nMesas) {
                 nMesaAtt++;    
             }
-            numero = nMesaAtt+numero;
+            numero = parseInt(nMesaAtt)+parseInt(numero);
             for (let i = nMesaAtt; i <= numero; i++) {
                 let qrCode = "provisório"
                 let novaMesa = {numero:i,qrCode,restaurante:usuario};
-                new Mesa(novaMesa).save().then(()=>{});
-                let att = await Mesa.findOne({numero:i});
-                await Mesa.updateOne({_id:att._id},{qrCode:`http://localhost:3000/homeMesas?id:${att._id}`})
-                console.log(att.numero);
+                new Mesa(novaMesa).save().then(async()=>{
+                    let att = await Mesa.findOne({numero:i});
+                    await Mesa.updateOne({_id:att._id},{qrCode:`http://localhost:3000/homeMesa?id=${att._id}`})
+                });
+                
             }
         }
         let minhasMesas = await Mesa.find();
@@ -126,11 +128,26 @@ const cardapioController = {
         res.redirect("/mesas")
         
         
+    },teste: async(req,res)=>{
+        let usuario = req.session.restaurante._id;
+        
+        let minhasMesas = await Mesa.find({restaurante:usuario});
+        let teste =await qr.toDataURL("texto qualquer",(err,url)=>{
+            let data = url.replace(/.*,/,"");
+            let imagem = new Buffer(data,"base64");
+            res.render("teste",{title:"teste",usuario,minhasMesas,data})
+            
+            
+        })
+        
+
     },
     showHomeMesa: async(req,res)=>{
-        let id = req.query.id;
+        let usuario = req.session.restaurante._id;
+        let {id} = req.query;
+        console.log(id)
         let mesa = await Mesa.findOne({_id:id})
-        res.redirect('/mesas')
+        res.render('homeMesa',{title:"sua mesa",mesa,usuario})
     }
 
 }

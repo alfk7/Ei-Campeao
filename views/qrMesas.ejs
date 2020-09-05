@@ -1,0 +1,26 @@
+<%-include("./partials/header",{active:title})%>
+
+<div class="d-flex justify-content-center teste col-8 centro caixa zero">
+    <div class="d-flex justify-content-between align-items-center col-12 amarelo">
+        <h3>Mesas</h3>
+        <a href="/mesas">Mesas</a>
+        <a href="/mesas/qr">Qr code</a>
+        <img src="" alt="">
+    </div>
+    <% if(minhasMesas.length ==0){%>
+    <h2>Sem mesa cadastrada</h2>
+    <%} else{ %>
+    <% for(mesa of minhasMesas) { %>
+    <div class="card " style="width: 14rem">
+        <div class="qrcode centro" id="<%=mesa.qrCode%>"></div>
+        <div class="card-body">
+            <h3 class="card-title "> mesa <%=mesa.numero%></h3>
+        </div>
+    </div>
+    <% }} %>
+
+</div>
+
+<script src="/javascripts/qrcode.min.js"></script>
+<script src="/javascripts/qrcode.js"></script>
+<%- include('./partials/footer') %>

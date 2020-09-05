@@ -12,6 +12,8 @@ router.post('/login',cardapioController.login)
 router.post('/cadastroProduto',cardapioController.novoProduto)
 router.get('/mesas',verificarRestauranteLogado,cardapioController.showMesas)
 router.post('/cadastroMesas',cardapioController.adicionarMesa)
+router.get('/mesas/qr',verificarRestauranteLogado,cardapioController.showQr)
+router.get('/teste',verificarRestauranteLogado,cardapioController.teste)
 
 // visão do cliente
 router.get('/homeMesa',cardapioController.showHomeMesa)
