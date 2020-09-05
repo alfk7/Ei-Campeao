@@ -97,7 +97,6 @@ const cardapioController = {
         let {numero}= req.body;
         let nMesaAtt = 1
         const nMesas = await Mesa.find({restaurante:usuario});
-        console.log(nMesas.length)
         if(nMesas.length == 0){
             for (let i = nMesaAtt; i <= numero; i++) {
                 let qrCode = "provisório"
@@ -110,7 +109,8 @@ const cardapioController = {
             }
         } else{
             for (const mesa of nMesas) {
-                nMesaAtt++;    
+                nMesaAtt++; 
+                console.log(nMesaAtt)   
             }
             numero = parseInt(nMesaAtt)+parseInt(numero);
             for (let i = nMesaAtt; i <= numero; i++) {
@@ -123,9 +123,9 @@ const cardapioController = {
                 
             }
         }
-        let minhasMesas = await Mesa.find();
+        let minhasMesas = await Mesa.find({restaurante:usuario});
         req.session.mesa = minhasMesas
-        res.redirect("/mesas")
+        res.redirect('/mesas')
         
         
     },teste: async(req,res)=>{
